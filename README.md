@@ -1,2 +1,2 @@
 # thinkinjava
-think in java exercises
+Exercises from the book <<Think in Java>>
