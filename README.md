@@ -1,7 +1,7 @@
 # thinkinjava
 Exercises from the book "**Think in Java**"
 
-1, Java SE5 引入了一种新的更加简洁的for语法用于数组和容器，即foreach语法，表示不必创建int变量去对由访问项构成的序列进行计数，foreach将自动产生每一项。
+1, Java SE5 引入了一种新的更加简洁的for语法用于数组和容器，即foreach语法，表示不必创建int变量去对由访问项构成的序列进行计数，foreach将自动产生每一项 。
 
 2，无穷循环的第二种形式是for(;;)，编译器将while(true)和for(;;)看作是同一回事，所以具体选用哪个取决于自己的编程习惯。
 
