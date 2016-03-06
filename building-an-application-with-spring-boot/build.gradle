@@ -11,14 +11,25 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+//apply plugin: 'war'
 
 jar {
     baseName = 'gs-spring-boot'
     version = '0.1.0'
 }
+/*
+war {
+    baseName = 'myapp'
+    version = '0.5.0'
+}
+*/
+springBoot {
+    executable = true
+}
 
 repositories {
-    mavenCentral()
+    //mavenCentral()
+    maven {url "http://proj.51idc.com:8081/nexus/content/groups/public/"}
 }
 
 sourceCompatibility = 1.8
