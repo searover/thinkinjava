@@ -3,36 +3,6 @@ package interfaces.classprocessor;
 import java.util.*;
 import static net.mindview.util.Print.*;
 
-class Processor{
-    public String name(){
-        return getClass().getSimpleName();
-    }
-
-    Object process(Object input){
-        return input;
-    }
-}
-
-class Upcase extends Processor{
-    // Covariant return
-    String process(Object input){
-        return ((String)input).toUpperCase();
-    }
-}
-
-class Downcase extends Processor{
-    String process(Object input){
-        return ((String)input).toLowerCase();
-    }
-}
-
-class Splitter extends Processor{
-    String process(Object input) {
-        // The split() argument divides a String into pieces.
-        return Arrays.toString(((String)input).split(" "));
-    }
-}
-
 /**
  * Created by searover on 3/6/16.
  */
