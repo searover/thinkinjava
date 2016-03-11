@@ -119,3 +119,4 @@ Exercises from the book "**Think in Java**"
         4）内部类并没有令人迷惑的“is-a”的关系； 它就是一个独立的实体。举个例子，如果 Sequence.java不使用内部类，就必须声明“Sequence 是一个 Selector”，对于某个特定的Sequence只能有一个Selector。然而使用内部类很容易就能拥有另一个方法 reverseSelector()，用它来生成一个反向遍历序列的Selector。只有内部类才有这种灵活性。
 
 
+
