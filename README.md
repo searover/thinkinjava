@@ -147,3 +147,17 @@ Exercises from the book "**Think in Java**"
 61，迭代器，也是一种设计模式，iterator，也是一个对象，它的工作是遍历并选择序列中的对象。Java中的Iterator只能单向移动，使用iterator()方法要求容器返回一个Iterator。迭代器统一了对容器的访问方式。
 
 62，ListIterator是一个更加强大的Iterator子类型，它只能用于各种List类的访问。尽管Iterator只能向前移动，但是ListIterator可以双向移动，还可以产生相对于迭代器在列表中指向的当前位置的前一个和后一个元素的索引，并且可以使用set()方法替换它访问过的最后一个元素。可以通过调用listIterator()方法得到一个指向List开始处的ListIterator。
+
+63，LinkedList也像ArrayList一样实现了基本接口，但是它执行某些操作（在List中间插入和移除）时比ArrayList更高效，但在随机访问方面要逊色一些。
+
+64，LinkedList 还添加了使其用作栈、队列或者双端队列的方法。
+
+65，Set中最常被使用的是测试归属性，因此你通常都会选择一个HashSet的实现，它专门对快速查找进行了优化。Set具有与Collection完全一样的接口，因此没有任何额外的功能。Set是基于对象的值来确定归属性的。
+
+66，出于速度的原因，HashSet使用了散列,因此，输出的顺序没有任何规律可循。HashSet所维护的顺序与TreeSet或LinkedHashSet都不同，因为它们的实现具有不同的元素存储方式。TreeSet将元素存储在红-黑树数据结构中，而HashSet使用的是散列函数。LinkedHashSet因为查询速度的原因也使用了散列，但是看起来它使用了链表来维护元素的插入顺序。如果你想对结果进行排序，一种方式是使用TreeSet来代替HashSet
+
+67，Java SE5 引入了新的被称为Iterable的接口，该接口包含一个能够产生Iterator的iterator()方法，并且Iterable接口被foreach用来在序列中移动。因此如果你创建了任何实现了Iterable的类，都可以将它用于foreach语句中。
+
+68，意识到Array.asList()产生的List对象会使用底层数组作为其物理实现是很重要的。只要你执行的操作会修改这个List，并且你不想原来的数组被修改，那么你就应该在另一个容器中创建一个副本。
+
+69，Map和Collection之间的唯一重叠就是Map可以使用entrySet()和values()方法来产生Collection。
