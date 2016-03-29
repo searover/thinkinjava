@@ -13,9 +13,9 @@ public class Print {
     /**
      * Print a newline by itself
      */
-    public static void print(){
-        System.out.println();
-    }
+//    public static void print(){
+//        System.out.println();
+//    }
 
     /**
      * Print with no line break
