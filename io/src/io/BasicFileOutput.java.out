@@ -1,0 +1,29 @@
+1: package io;
+2: 
+3: import java.io.*;
+4: 
+5: /**
+6:  * Created by searover on 4/16/16.
+7:  */
+8: public class BasicFileOutput {
+9:     static String inFilename = "/Users/searover/Documents/temp/java-demo/thinkinjava/io/src/io/BasicFileOutput.java";
+10:     static String outFilename = "/Users/searover/Documents/temp/java-demo/thinkinjava/io/src/io/BasicFileOutput.java.out";
+11: 
+12:     public static void main(String[] args) throws IOException {
+13:         BufferedReader in = new BufferedReader(
+14:                 new StringReader(BufferedInputFile.read(inFilename))
+15:         );
+16:         PrintWriter out = new PrintWriter(
+17:                 new BufferedWriter(
+18:                         new FileWriter(outFilename)
+19:                 )
+20:         );
+21:         int lineCount = 1;
+22:         String s;
+23:         while ((s = in.readLine()) != null){
+24:             out.println(lineCount++ + ": " + s);
+25:         }
+26:         out.close();
+27:         System.out.println(BufferedInputFile.read(outFilename));
+28:     }
+29: }

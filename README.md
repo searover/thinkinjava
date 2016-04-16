@@ -186,4 +186,56 @@ Exercises from the book "**Think in Java**"
 
 80，擦除的核心动机是它使得泛化的客户端可以用非泛化的类库来使用，反之亦然，这经常被称为“迁移兼容性”。通过允许泛型和非泛型代码共存，擦除使得这种向着泛型的迁移成为可能。
 
-81，
+81，所有Collection子类型都有一个接收另一个Collection对象的构造器，用所接收的Collection对象中的元素来填充新的容器。
+
+82，InputStream的作用是用来表示那些从不同数据源产生输入的类：
+    1），字节数组
+    2），String对象
+    3），文件
+    4），“管道”，工作方式与实际管道相似，即，从一端输入，从另一端输出。
+    5），一个由其他种类的流组成的序列，以便我们将它们收集合并到一个流内。
+    6），其他数据源，如Internet连接等。
+
+83，每一种数据源都有相应的InputStream子类，另外，FilterInputStream也属于一种InputStream，是“装饰器”（decorator）类的基类。
+
+84，装饰器模式也有一个缺点：在编写程序时，它给我们提供了相当多的灵活性（因为我们可以很容易的混合和匹配属性），但是它同时也增加了代码的复杂度。Java I/O类库操作不便的原因在于：我们必须创建许多类——“核心”I/O类型加上所有装饰器，才能得到我们所希望的单个I/O对象。
+
+85，BufferedOutputStream是一个修改过的OutputStream，它对数据流使用缓冲技术，因此当每次向流写入时，不必每次都进行实际的物理写操作。所以在进行输出时，我们可能更经常的使用它。
+
+86，FilterOutputStream类型：
+    DataOutputStream，与DataInputStream搭配使用，可以按照可移植的方式向流中写入基本类型数据（char,int,long...)
+    PrintStream，用于产生格式化输出，其中DataOutputStream处理数据的存储，PrintStream处理显示
+    BufferedOutputStream，使用它可以避免每次发送数据时都要进行实际的写操作。代表“使用缓冲区”，可以调用flush()清空缓冲区。
+
+87，Java1.1对基本的I/O流类库进行了重大的修改，增加了Reader和Writer类。InputStream和OutputStream在以面向字节形式的I/O中仍可以提供极有价值的功能，Reader和Writer则提供兼容Unicode与面向字符的I/O功能。
+
+88，有时我们必须把来自于“字节”层次结构中的类和“字符”层次结构中的类结合起来使用，为了实现这个目的，要用到“适配器”（adapter）类：InputStreamReader可以把InputStream转换为Reader，而OutputStreamWriter可以把OutputStream转换为Writer。
+
+89，设计Reader和Writer继承层次结构主要是为了国际化，老的I/O流继承层次结构仅支持8位字节流，并且不能很好的处理16位的Unicode字符。由于Unicode用于字符国际化（Java本身的char也是16位的Unicode），所以添加Reader和Writer继承层次结构就是为了在所有的I/O操作中都支持Unicode。另外，新类库的设计使得它的操作比旧类库更快。
+
+90，在两各不能的继承层次结构中，信息的来源和去处：
+    InputStream                             Reader
+                                            Adapter: InputStreamReader
+    OutputStream                            Writer
+                                            Adapter: OutputStreamWriter
+    FileInputStream                         FileReader
+    FileOutputStream                        FileWriter
+    StringBufferInputStream(Deprecated)     StringReader
+    (No correspond class)                   StringWriter
+    ByteArrayInputStream                    CharArrayReader
+    ByteArrayOutputStream                   CharArrayWriter
+    PipeInputStream                         PipeReader
+    PipeOutputStream                        PipeWriter
+
+91，更改流的行为：
+    FilterInputStream                       FilterReader
+    FilterOutputStream                      FilterWriter
+    BufferedInputStream                     BufferedReader(also has readLine() method)
+    BufferedOutputStream                    BufferedWriter
+    DataInputStream                         Use DataInputStream(except need to use readLine() method, then you should use BufferedReader)
+    PrintStream                             PrintWriter
+    LineNumberInputStream(Deprecated)       LineNumberReader
+    StreamTokenizer                         StreamTokenizer(Use constructor with Reader object)
+    PushbackInputStream                     PushbackReader
+
+
