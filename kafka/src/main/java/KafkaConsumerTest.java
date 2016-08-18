@@ -23,10 +23,10 @@ public class KafkaConsumerTest {
     private ConsumerIterator<byte[], byte[]> iterator2;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         props = new Properties();
         props.put("zookeeper.connect", "192.168.9.21:2181");
-        props.put("group.id", "java_tester_1");
+        props.put("group.id", "go-consumer-groupx");
         props.put("zookeeper.session.timeout.ms", "150000");
         props.put("zookeeper.sync.time.ms", "200");
         props.put("auto.offset.reset", "smallest");
@@ -39,20 +39,22 @@ public class KafkaConsumerTest {
     @Test
     public void sigleTopicMultiConsumerInstanceTest() throws InterruptedException {
         Map<String, Integer> topicCountMap = new HashMap<>();
-        topicCountMap.put("create_router", 2);
+        topicCountMap.put("runInstance", 1);
         Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap =
                 connector.createMessageStreams(topicCountMap);
-        List<KafkaStream<byte[], byte[]>> streams = consumerMap.get("create_router");
+        List<KafkaStream<byte[], byte[]>> streams = consumerMap.get("runInstance");
         KafkaStream<byte[], byte[]> kafkaStream = streams.get(0);
-        KafkaStream<byte[], byte[]> kafkaStream2 = streams.get(1);
+//        KafkaStream<byte[], byte[]> kafkaStream2 = streams.get(1);
         iterator = kafkaStream.iterator();
-        iterator2 = kafkaStream2.iterator();
+//        iterator2 = kafkaStream2.iterator();
         MessageAndMetadata<byte[], byte[]> mam = iterator.next();
-        MessageAndMetadata<byte[], byte[]> mam2 = iterator2.next();
+//        MessageAndMetadata<byte[], byte[]> mam2 = iterator2.next();
         String message = new String(mam.message());
-        String message2 = new String(mam2.message());
-        System.out.println(streams.size());
-        printMessage(mam, mam2, message, message2);
+        String key = new String(mam.key());
+//        String message2 = new String(mam2.message());
+        System.out.println(key + "\t" + message);
+//        printMessage(mam, mam2, message, message2);
+//        Thread.sleep(10000*100000);
     }
 
     @Test
@@ -71,18 +73,18 @@ public class KafkaConsumerTest {
         String message = new String(mam.message());
         String message2 = new String(mam2.message());
         printMessage(mam, mam2, message, message2);
+        connector.commitOffsets();
+        connector.shutdown();
     }
 
     private void printMessage(MessageAndMetadata<byte[], byte[]> mam, MessageAndMetadata<byte[], byte[]> mam2, String message, String message2) throws InterruptedException {
         System.out.println("===============================");
         System.out.println("===============================");
-        System.out.println(mam.partition());
+        System.out.println(mam.partition() + "\t" + mam.offset());
         System.out.println(message);
-        System.out.println(mam2.partition());
+        System.out.println(mam2.partition() + "\t" + mam.offset());
         System.out.println(message2);
         System.out.println("===============================");
         System.out.println("===============================");
-        Thread.sleep(5*1000);
-        connector.shutdown();
     }
 }

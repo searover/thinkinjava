@@ -37,10 +37,10 @@ public class KafkaProducerTest {
             long runtime = new Date().getTime();
             String ip = "192.168.2." + rand.nextInt(255);
             String msg = runtime + ",www.51idc.com," + ip;
-            KeyedMessage<String, String> data = new KeyedMessage<String, String>("page_visits", ip, msg);
+            KeyedMessage<String, String> data = new KeyedMessage<String, String>("runInstance", ip, msg);
             System.out.println("=========================");
             producer.send(data);
-            System.out.println(data);
+            System.out.println(data.key() + "\t" + data.message());
             System.out.println("=========================");
         }
     }
