@@ -6,9 +6,7 @@ import org.junit.Test;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.Date;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by searover on 4/25/16.
@@ -43,5 +41,11 @@ public class KafkaProducerTest {
             System.out.println(data.key() + "\t" + data.message());
             System.out.println("=========================");
         }
+    }
+
+    @Test
+    public void testHashmap(){
+        Map map = new HashMap();
+        map.put("1","2");
     }
 }
