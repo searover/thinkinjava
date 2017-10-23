@@ -3,6 +3,7 @@ package strings;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.EnumSet;
 
 /**
  * Created by searover on 3/28/16.
@@ -27,6 +28,7 @@ public class SimpleRead {
             System.out.format("Hi %s.\n", name);
             System.out.format("In 5 years you will be %d.\n", age + 5);
             System.out.format("My favorite double is %f", favorite / 2);
+            EnumSet
         } catch (IOException e) {
             System.err.println("I/O exception");
         }

@@ -25,7 +25,7 @@ public class KafkaConsumerTest {
     @Before
     public void setUp() {
         props = new Properties();
-        props.put("zookeeper.connect", "192.168.9.21:2181");
+        props.put("zookeeper.connect", "192.168.103.245:2181");
         props.put("group.id", "go-consumer-groupx");
         props.put("zookeeper.session.timeout.ms", "150000");
         props.put("zookeeper.sync.time.ms", "200");
@@ -39,22 +39,27 @@ public class KafkaConsumerTest {
     @Test
     public void sigleTopicMultiConsumerInstanceTest() throws InterruptedException {
         Map<String, Integer> topicCountMap = new HashMap<>();
-        topicCountMap.put("runInstance", 1);
+        topicCountMap.put("chenyl", 1);
         Map<String, List<KafkaStream<byte[], byte[]>>> consumerMap =
                 connector.createMessageStreams(topicCountMap);
-        List<KafkaStream<byte[], byte[]>> streams = consumerMap.get("runInstance");
+        List<KafkaStream<byte[], byte[]>> streams = consumerMap.get("chenyl");
         KafkaStream<byte[], byte[]> kafkaStream = streams.get(0);
 //        KafkaStream<byte[], byte[]> kafkaStream2 = streams.get(1);
         iterator = kafkaStream.iterator();
 //        iterator2 = kafkaStream2.iterator();
-        MessageAndMetadata<byte[], byte[]> mam = iterator.next();
+        while (iterator.hasNext()) {
+            MessageAndMetadata<byte[], byte[]> mam = iterator.next();
 //        MessageAndMetadata<byte[], byte[]> mam2 = iterator2.next();
-        String message = new String(mam.message());
-        String key = new String(mam.key());
+            String message = new String(mam.message());
+//        String key = new String(mam.key());
 //        String message2 = new String(mam2.message());
-        System.out.println(key + "\t" + message);
+            System.out.println(message);
 //        printMessage(mam, mam2, message, message2);
 //        Thread.sleep(10000*100000);
+            connector.commitOffsets();
+//            Thread.sleep(500);
+        }
+        connector.shutdown();
     }
 
     @Test
